@@ -1,0 +1,114 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    Reactive Forms
+  </div>
+  <div class="panel-body">
+
+    <form (ngSubmit)="saveUser()"
+      [formGroup]="userForm">
+      <div class="form-group" [ngClass]="{'has-error':!userForm.get('firstname').valid && userForm.get('firstname').touched}">
+        <label for="firstname" class="control-label">Firstname</label>
+        <input class="form-control" type="text" id="firstname" 
+          placeholder="Firstname"
+          formControlName="firstname" />
+        <div *ngIf="!userForm.get('firstname').valid && userForm.get('firstname').touched">
+          <div *ngIf="userForm.get('firstname').errors.required" class="alert alert-danger">
+            Please enter your firstname
+          </div>
+          <div *ngIf="userForm.get('firstname').errors.minlength" class="alert alert-danger">
+            Please enter a valid firstname
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!userForm.get('lastname').valid && userForm.get('lastname').touched}">
+        <label for="lastname" class="control-label">Lastname</label>
+        <input class="form-control" type="text" id="lastname" 
+          placeholder="Lastname"
+          formControlName="lastname" />
+        <div *ngIf="!userForm.get('lastname').valid && userForm.get('lastname').touched">
+          <div *ngIf="userForm.get('lastname').errors.required" class="alert alert-danger">
+            Please enter your lastname
+          </div>
+          <div *ngIf="userForm.get('lastname').errors.minlength" class="alert alert-danger">
+            Please enter a valid lastname
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!userForm.get('email').valid && userForm.get('email').touched}">
+        <label for="email" class="control-label">Email</label>
+        <input class="form-control" type="email" id="email" 
+          placeholder="Email"
+          formControlName="email" />
+        <div *ngIf="!userForm.get('email').valid && userForm.get('email').touched">
+          <div *ngIf="userForm.get('email').errors.required" class="alert alert-danger">
+            Please enter your email
+          </div>
+          <div *ngIf="userForm.get('email').errors.pattern" class="alert alert-danger">
+            Please enter a valid email
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!userForm.get('phone').valid && userForm.get('phone').touched}">
+        <label for="phone" class="control-label">Phone</label>
+        <input type="text" placeholder="Phone" id="phone" class="form-control"
+          formControlName="phone"
+        />
+        <div *ngIf="!userForm.get('phone').valid && userForm.get('phone').touched">
+          <div *ngIf="userForm.get('phone').errors.required" class="alert alert-danger">
+            Please enter phone
+          </div>
+          <div *ngIf="userForm.get('phone').errors.minlength" class="alert alert-danger">
+            Please enter a valid phone number
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!userForm.get('gender').valid && userForm.get('gender').touched}">
+        <div class="radio">
+          <label class="control-label">
+            <input type="radio" formControlName="gender" required value="Male" (click)='updateValidation("male")' /> Male
+          </label>
+          <label class="control-label">
+            <input type="radio" formControlName="gender" required value="Female" (click)='updateValidation("female")'/> Female
+          </label>
+        </div>
+        <div class="alert alert-danger" *ngIf="!userForm.get('gender').valid && userForm.get('gender').touched">
+          Please select gender
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="radio">
+          <label class="control-label">
+            <input type="radio" value="Email" formControlName="notification" (click)="updateNotification('email')" /> Email
+          </label>
+          <label class="control-label">
+            <input type="radio" value="Text" formControlName="notification" (click)="updateNotification('text')" /> Text
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Details</label>
+        <input class="form-control" type="text" id="details" 
+          placeholder="Details"
+          formControlName="details" />
+          <div *ngIf="!userForm.get('details').valid && (userForm.get('details').touched)">
+            <div *ngIf="userForm.get('details').errors.required" class="alert alert-danger">
+              Please enter details
+            </div>
+            <div *ngIf="userForm.get('details').errors.minlength" class="alert alert-danger">
+              Please enter valid details
+            </div>
+          </div>
+      </div>
+
+      <button [disabled]="!userForm.valid" class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-success" type="submit" (click)="populateForm()">Populate Form</button>
+    </form>
+
+  </div>
+</div>

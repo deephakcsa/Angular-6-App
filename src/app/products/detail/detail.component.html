@@ -1,0 +1,21 @@
+<button class="btn" (click)="back()">< Back to Products</button><br><br>
+
+<div class="jumbotron">
+  <img *ngIf="details.imageUrl" [src]="details.imageUrl" style="width:150px" />
+  <br><br>
+  <h3>{{details.productName}}</h3><br>
+  <div id="details">
+      <p>Product ID : {{details.productId}}</p>
+      <p>Product Code : {{details.productCode}}</p>
+      <p>Release Date : {{details.releaseDate}}</p>
+      <p>Description : {{details.description}}</p>
+      <p>Price : ${{details.price}}</p>
+      <p>Rating : ({{details.starRating}})</p>
+      <div *ngIf="details.starRating">
+        <app-rating [rating]= "details.starRating" style="display: inline-block"></app-rating>
+      </div>
+      
+  </div>
+</div>
+
+<!-- <app-rating [rating]= "details.starRating" style="display: inline-block"></app-rating> -->

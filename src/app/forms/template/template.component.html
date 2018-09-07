@@ -1,0 +1,64 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Template driven forms</div>
+  <div class="panel-body">
+    <form (ngSubmit)="saveUser(userForm.value, userForm.valid)" #userForm="ngForm">
+      <div class="form-group" [ngClass]="{'has-error':!firstnameVar.valid && (firstnameVar.touched || userForm.submitted)}">
+        <label for="firstname" class="control-label">Firstname</label>
+        <input class="form-control" type="text" id="firstname" [(ngModel)]="user.firstname" name="firstname" placeholder="Firstname"
+          required minlength="5" #firstnameVar="ngModel" />
+        <div *ngIf="!firstnameVar.valid && (firstnameVar.touched || userForm.submitted)">
+          <div *ngIf="firstnameVar.errors.required" class="alert alert-danger">
+            Please enter your firstname
+          </div>
+          <div *ngIf="firstnameVar.errors.minlength" class="alert alert-danger">
+            Please enter a valid firstname
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!lastnameVar.valid && (lastnameVar.touched || userForm.submitted)}">
+        <label for="lastname" class="control-label">Lastname</label>
+        <input class="form-control" type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" placeholder="Lastname"
+          required minlength="5" #lastnameVar="ngModel" />
+        <div *ngIf="!lastnameVar.valid && (lastnameVar.touched || userForm.submitted)">
+          <div *ngIf="lastnameVar.errors.required" class="alert alert-danger">
+            Please enter your lastname
+          </div>
+          <div *ngIf="lastnameVar.errors.minlength" class="alert alert-danger">
+            Please enter a valid lastname
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!emailVar.valid && (emailVar.touched || userForm.submitted)}">
+        <label for="email" class="control-label">Email</label>
+        <input class="form-control" type="email" id="email" [(ngModel)]="user.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          name="email" placeholder="Email" required #emailVar="ngModel" />
+        <div *ngIf="!emailVar.valid && (emailVar.touched || userForm.submitted)">
+          <div *ngIf="emailVar.errors.required" class="alert alert-danger">
+            Please enter your email
+          </div>
+          <div *ngIf="emailVar.errors.pattern" class="alert alert-danger">
+            Please enter a valid email
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!gender.valid && (gender.touched || userForm.submitted)}">
+        <div class="radio">
+          <label class="control-label">
+            <input type="radio" name="gender" required value="Male" [(ngModel)]="user.gender" #gender="ngModel" /> Male
+          </label>
+          <label class="control-label">
+            <input type="radio" name="gender" required value="Female" [(ngModel)]="user.gender" #gender="ngModel" /> Female
+          </label>
+        </div>
+        <div class="alert alert-danger" *ngIf="!gender.valid && (gender.touched || userForm.submitted)">
+          Please select gender
+        </div>
+      </div>
+
+      <button [disabled]="!userForm.valid" class="btn btn-primary" type="submit">Save</button>
+    </form>
+  </div>
+</div>
